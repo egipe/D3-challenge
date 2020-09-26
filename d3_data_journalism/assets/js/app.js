@@ -25,11 +25,11 @@ var chosenXAxis = "poverty";
 // var chosenYAxis = "healthcare";
 
 // function used for updating x-scale var upon click on axis label
-function xScale(data, chosenXAxis) {
+function xScale(censusData, chosenXAxis) {
     // create scales
     var xLinearScale = d3.scaleLinear()
-      .domain([d3.min(data, d => d[chosenXAxis]) * 0.8,
-        d3.max(data, d => d[chosenXAxis]) * 1.2
+      .domain([d3.min(censusData, d => d[chosenXAxis]) * 0.8,
+        d3.max(censusData, d => d[chosenXAxis]) * 1.2
       ])
       .range([0, width]);
   
@@ -170,10 +170,10 @@ d3.csv("assets/data/data.csv").then(function(censusData, err) {
     .enter()
     .append("circle")
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
-    // .attr("cy", d => yLinearScale(d[chosenYAxis]))
-    .attr("r", 20)
-    .attr("fill", "pink")
-    .attr("opacity", ".5");
+    .attr("cy", d => yLinearScale(d.healthcare))
+    .attr("r", 10)
+    .attr("fill", "blue")
+    .attr("opacity", ".7");
 
   
   // Create group for two x-axis labels
